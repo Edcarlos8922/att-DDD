@@ -1,0 +1,35 @@
+package com.exemplo.produto.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.web.bind.annotation.*;
+
+import com.exemplo.produto.model.Produto;
+import com.exemplo.produto.service.ProdutoService;
+
+@RestController
+@RequestMapping("/produtos")
+public class ProdutoController {
+
+    private final ProdutoService produtoService;
+
+    public ProdutoController(ProdutoService produtoService) {
+        this.produtoService = produtoService;
+    }
+
+    @PostMapping
+    public Produto criarProduto(@RequestBody Produto produto) {
+        return produtoService.salvar(produto);
+    }
+
+    @GetMapping
+    public List<Produto> listarTodos() {
+        return produtoService.listarTodos();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Produto> buscarPorId(@PathVariable Long id) {
+        return produtoService.buscarPorId(id);
+    }
+}
