@@ -1,0 +1,31 @@
+package com.exemplo.produto.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.exemplo.produto.model.Produto;
+import com.exemplo.produto.repository.ProdutoRepository;
+
+@Service
+public class ProdutoService {
+
+    private final ProdutoRepository produtoRepository;
+
+    public ProdutoService(ProdutoRepository produtoRepository) {
+        this.produtoRepository = produtoRepository;
+    }
+
+    public Produto salvar(Produto p) {
+        return produtoRepository.save(p);
+    }
+
+    public List<Produto> listarTodos() {
+        return produtoRepository.findAll();
+    }
+
+    public Optional<Produto> buscarPorId(Long id) {
+        return produtoRepository.findById(id);
+    }
+}
